@@ -1,0 +1,39 @@
+<!--SignIn-->
+
+
+<h1>Harvest Me</h1>
+
+
+<%= form_for @user, url: sessions_path do |f| %>
+  <% if @user.errors.any? %>
+    <ul>
+      <% @user.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+    </ul>
+  <% end %>
+
+  <ul>
+    <li>
+      <%= f.label :username %>
+      <%= f.text_field :username %>
+    </li>
+    <li>
+      <%= f.label :password %>
+      <%= f.password_field :password %>
+    </li>
+    <li>Forgot password?</li>
+    <li>
+      <%= f.submit "Sign In" %>
+    </li>
+  </ul>
+<% end %>
+
+
+<h3>
+  or <br>
+  <%= link_to "Register", new_registration_path %>
+</h3>
+
+
+
