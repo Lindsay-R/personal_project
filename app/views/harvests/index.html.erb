@@ -1,0 +1,23 @@
+
+
+
+
+
+
+
+<%  @harvests.each do |harvest| %>
+
+  <h2><%= link_to harvest.produce_type + " - " + harvest.city, harvest_path(harvest) %></h2>
+  <%= image_tag harvest.image_url(:thumb).to_s if harvest.image? %>
+
+
+<% end %>
+
+
+
+
+
+
+
+
+

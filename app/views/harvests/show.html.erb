@@ -1,0 +1,42 @@
+
+
+
+<%= link_to "<< Back to View Harvests", harvests_path %>
+
+  <h2><%= @harvest.produce_type %> - <%= @harvest.city%>, <%= @harvest.state%></h2>
+  <%= image_tag @harvest.image_url(:standard).to_s if @harvest.image? %><br>
+
+
+  <script>
+    function initialize() {
+      var mapCanvas = document.getElementById('map_canvas<%= @harvest.id %>');
+
+      var coord = new google.maps.LatLng( <%= @harvest.latitude %>, <%= @harvest.longitude %>)
+
+      var mapOptions = {
+        center: coord,
+        zoom: 17,
+        mapTypeId: google.maps.MapTypeId.ROADMAP
+      }
+
+      var map = new google.maps.Map(mapCanvas, mapOptions)
+      var marker = new google.maps.Marker({
+        position: coord,
+        map: map,
+        title:"You are here!"
+      });
+
+    }
+    google.maps.event.addDomListener(window, 'load', initialize);
+
+
+
+  </script>
+  <div id="map_canvas<%= @harvest.id %>" class="small-map"></div>
+
+
+  <br>
+  <%= link_to "edit", edit_harvest_path(@harvest) %> |
+  <%= link_to "remove", @harvest, :confirm => 'Are you sure?', :method => :delete %>
+
+

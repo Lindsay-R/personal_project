@@ -1,10 +1,15 @@
 Rails.application.routes.draw do
-  root "sessions#new"
+  root "dashboards#show"
 
 
   resources :registrations, only: [:new, :create]
   resources :sessions, only: [:new, :create, :destroy, :show]
+
+
+
   resources :harvests
+
+  resources :my_harvests, only: [:index]
 
   get "dashboard" => "dashboards#show", as: :dashboard
   get "signin" => "sessions#new", as: :signin

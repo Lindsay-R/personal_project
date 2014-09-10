@@ -18,14 +18,16 @@
 
 $(document).ready(function() {
 
+//  ###GEOLOCATION---------------------------------------------------------------------------------------------------
+
   $('.geo-container').on('click', 'a', function() {
 //    $('.color').css('color', 'red');
 
     function success(position) {
       var mapcanvas = document.createElement('div');
       mapcanvas.id = 'mapcontainer';
-      mapcanvas.style.height = '300px';
-      mapcanvas.style.width = '300px';
+      mapcanvas.style.height = '175px';
+      mapcanvas.style.width = '250px';
 
       document.querySelector('article').appendChild(mapcanvas);
 
@@ -35,8 +37,17 @@ $(document).ready(function() {
       var lat=position.coords.latitude;
       var long=position.coords.longitude;
 
-//      printing it out
-      $('.geo-container').text('your coordinates: '+ coords +'lat:'+ lat+' long:'+long);
+
+
+
+//      --adding lat and long to the input fields--
+
+      $('#harvest_latitude').val($('#harvest_latitude').val() + lat);
+      $('#harvest_longitude').val($('#harvest_longitude').val() + long);
+
+//      -------------------------------------------
+
+
 
       var options = {
         zoom: 17,
@@ -64,13 +75,55 @@ $(document).ready(function() {
 
 
 
+
+
+//----## getting address-------
+
+    //I'm not doing anything else, so just leave
+    if(!navigator.geolocation) return;
+
+    navigator.geolocation.getCurrentPosition(function(pos) {
+      geocoder = new google.maps.Geocoder();
+      var latlng = new google.maps.LatLng(pos.coords.latitude,pos.coords.longitude);
+      geocoder.geocode({'latLng': latlng}, function(results, status) {
+        if (status == google.maps.GeocoderStatus.OK) {
+          //Check result 0
+          var result = results[0];
+          //look for locality tag and administrative_area_level_1
+          var city = "";
+          var state = "";
+          for(var i=0, len=result.address_components.length; i<len; i++) {
+            var ac = result.address_components[i];
+            if(ac.types.indexOf("locality") >= 0) city = ac.long_name;
+            if(ac.types.indexOf("administrative_area_level_1") >= 0) state = ac.long_name;
+          }
+          //only report if we got Good Stuff
+          if(city != '' && state != '') {
+            $("#city-state").html("Your Location: "+city+", "+state+".");
+          }
+
+          //      --adding city, state to the input field --
+
+          $('#harvest_city').val($('#harvest_city').val() + city);
+          $('#harvest_state').val($('#harvest_state').val() + state);
+
+          //      -------------------------------------------
+
+
+        }
+      });
+
+    });
+
+//----end ## getting address----
+
+
+
+
   });
-
-
-
-
-
+  //  end ###GEOLOCATION---------------------------------------------------------------------------------------------------
 
 
 
 });
+

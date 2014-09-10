@@ -1,5 +1,7 @@
 class RegistrationsController < ApplicationController
 
+  skip_before_action :ensure_current_user
+
   skip_before_filter :ensure_authenticated_user
 
   def new
@@ -14,7 +16,8 @@ class RegistrationsController < ApplicationController
     )
 
     if @user.save
-      redirect_to root_path
+      session[:user_id] = @user.id
+      redirect_to dashboard_path
     else
       render :new
     end

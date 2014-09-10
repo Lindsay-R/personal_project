@@ -13,3 +13,9 @@
  *= require_tree .
  *= require_self
  */
+
+
+.small-map {
+    width: 250px;
+    height: 175px;
+}
