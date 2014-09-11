@@ -48,3 +48,6 @@ end
 
 gem 'carrierwave'
 gem 'cloudinary'
+
+
+gem 'rails_12factor', group: :production
