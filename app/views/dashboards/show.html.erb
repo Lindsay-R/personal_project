@@ -3,19 +3,11 @@
 <h1>Welcome, <%=current_user.username%> </h1>
 
 
-<%= form_tag harvests_path, :method => 'get', id:'search-form' do %>
-  <p>
-    <%= text_field_tag :search, params[:search], placeholder: "Search by city" %>
-    <%= submit_tag "Search", :name => nil %>
-  </p>
-<% end %>
-
-
-<h3>
-  <%= link_to "Create a Harvest", new_harvest_path %> <br><br>
-  <%= link_to "View Harvests", harvests_path %><br><br>
-  <%= link_to "Edit My Harvests", my_harvests_path %>
-</h3>
+<ul>
+  <li><%= link_to "Create a Harvest", new_harvest_path %></li>
+  <li><%= link_to "View All Harvests", harvests_path %></li>
+  <li><%= link_to "View/Edit My Harvests", my_harvests_path %></li>
+</ul>
 
 
 

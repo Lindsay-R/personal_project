@@ -1,15 +1,15 @@
+<%= form_tag harvests_path, :method => 'get', id: 'search-form' do %>
+  <p>
+    <%= text_field_tag :search, params[:search], placeholder: "Search all harvests" %>
+    <%= submit_tag "Search", :name => nil %>
+  </p>
+<% end %>
 
 
-
-
-
-
-
-<%  @harvests.each do |harvest| %>
+<% @harvests.each do |harvest| %>
 
   <h2><%= link_to harvest.produce_type + " - " + harvest.city, harvest_path(harvest) %></h2>
   <%= image_tag harvest.image_url(:thumb).to_s if harvest.image? %>
-
 
 <% end %>
 

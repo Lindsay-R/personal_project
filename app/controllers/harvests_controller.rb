@@ -3,16 +3,17 @@ class HarvestsController < ApplicationController
   def index
     @harvests = Harvest.all
 
-    # if params[:search]
-    #   @harvests = Harvest.search(params[:search]).order("created_at DESC")
-    # else
-    #   @harvests = Harvest.all.order('created_at DESC')
-    # end
+    if params[:search]
+      @harvests = Harvest.search(params[:search]).order("created_at DESC")
+    else
+      @harvests = Harvest.all.order('created_at DESC')
+    end
 
   end
 
   def show
     @harvest = Harvest.find(params[:id])
+
   end
 
   def new
@@ -33,7 +34,7 @@ class HarvestsController < ApplicationController
       user_id: session[:user_id]
     )
     @harvest.save
-    redirect_to harvests_path
+    redirect_to my_harvests_path
   end
 
   def edit
@@ -50,7 +51,7 @@ class HarvestsController < ApplicationController
       image: params[:harvest][:image],
       user_id: session[:user_id]
     )
-      redirect_to harvests_path
+      redirect_to my_harvests_path
     else
       render :edit
     end
@@ -59,7 +60,10 @@ class HarvestsController < ApplicationController
   def destroy
     @harvest = Harvest.find(params[:id])
     @harvest.destroy
-    redirect_to harvests_path
+    redirect_to my_harvests_path
   end
+
+
+
 
 end

@@ -3,9 +3,8 @@
 
 
 <%= form_for @harvest do |f| %>
-  <h2>Location Of Your Plant</h2>
-  Note: Click the ALLOW button to let the browser find your location.
-  <br><br>
+  <ul>
+  <li>Location Of Your Plant <em>...Note: Click the ALLOW button to let the browser find your location.</em>
 
   <div id="city-state"></div>
 
@@ -16,31 +15,31 @@
 
   <div class="geo-container">
     <a href="#">Location Lookup</a>
-    <!--<h2 class="color">hi</h2>-->
     <%= f.hidden_field :latitude %>
     <%= f.hidden_field :longitude %>
     <%= f.hidden_field :city %>
     <%= f.hidden_field :state %>
   </div>
+  </li>
 
+    <br><br>
 
+    <li>Produce Type
+    <%= f.text_field :produce_type, placeholder: "Produce Type" %>
+    </li>
+    <br><br>
 
+    <li>Image
 
-  <h2>Produce Type</h2>
-  <p>
-    <%= f.label :produce_type %><br />
-    <%= f.text_field :produce_type %>
-  </p>
-  <h2>Image</h2>
-  <p>
-    <%= f.label :image_name %><br />
-    <%= f.text_field :image_name %>
-  </p>
-  <p>
-    <%= f.file_field :image %>
-  </p>
-  <br />
-  <p><%= f.submit %></p>
+    <%= f.text_field :image_name, placeholder: "image name"  %>
+
+    <%= f.file_field :image%>
+    </li>
+
+  <br><br>
+  <li><%= f.submit %></li>
+
+  </ul>
 <% end %>
 
 

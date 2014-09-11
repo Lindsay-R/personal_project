@@ -1,9 +1,7 @@
-
-
-
 <%= link_to "<< Back to View Harvests", harvests_path %>
 
   <h2><%= @harvest.produce_type %> - <%= @harvest.city%>, <%= @harvest.state%></h2>
+  <h3>Posted by: <%= @harvest.user.username %></h3>
   <%= image_tag @harvest.image_url(:standard).to_s if @harvest.image? %><br>
 
 
@@ -15,16 +13,20 @@
 
       var mapOptions = {
         center: coord,
-        zoom: 17,
-        mapTypeId: google.maps.MapTypeId.ROADMAP
+        zoom: 18,
+        mapTypeId: google.maps.MapTypeId.SATELLITE
       }
 
       var map = new google.maps.Map(mapCanvas, mapOptions)
+
       var marker = new google.maps.Marker({
         position: coord,
         map: map,
-        title:"You are here!"
+        title: 'Harvest',
+        icon: {url: '/assets/marker.png'}
+//        scaledSize:new google.maps.Size(71, 71)
       });
+
 
     }
     google.maps.event.addDomListener(window, 'load', initialize);
@@ -36,7 +38,12 @@
 
 
   <br>
+
+<% if @harvest.user_id == current_user.id%>
+
   <%= link_to "edit", edit_harvest_path(@harvest) %> |
   <%= link_to "remove", @harvest, :confirm => 'Are you sure?', :method => :delete %>
 
+<% else %>
 
+<% end %>

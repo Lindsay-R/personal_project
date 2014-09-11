@@ -42,28 +42,29 @@ $(document).ready(function() {
 
 //      --adding lat and long to the input fields--
 
-      $('#harvest_latitude').val($('#harvest_latitude').val() + lat);
-      $('#harvest_longitude').val($('#harvest_longitude').val() + long);
+      $('#harvest_latitude').val(lat);
+      $('#harvest_longitude').val(long);
 
 //      -------------------------------------------
 
 
 
       var options = {
-        zoom: 17,
+        zoom: 18,
         center: coords,
         mapTypeControl: true,
         navigationControlOptions: {
           style: google.maps.NavigationControlStyle.SMALL
         },
-        mapTypeId: google.maps.MapTypeId.ROADMAP
+        mapTypeId: google.maps.MapTypeId.SATELLITE
       };
       var map = new google.maps.Map(document.getElementById("mapcontainer"), options);
 
       var marker = new google.maps.Marker({
         position: coords,
         map: map,
-        title:"You are here!"
+        title:"Harvest",
+        icon: {url: '/assets/marker.png'}
       });
     }
 
@@ -104,8 +105,9 @@ $(document).ready(function() {
 
           //      --adding city, state to the input field --
 
-          $('#harvest_city').val($('#harvest_city').val() + city);
-          $('#harvest_state').val($('#harvest_state').val() + state);
+          $('#harvest_city').val(city);
+          $('#harvest_state').val(state);
+//          $('#harvest_state').val($('#harvest_state').val() + state);
 
           //      -------------------------------------------
 
