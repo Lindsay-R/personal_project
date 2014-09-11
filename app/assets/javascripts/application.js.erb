@@ -64,7 +64,8 @@ $(document).ready(function() {
         position: coords,
         map: map,
         title:"Harvest",
-        icon: {url: '/assets/marker.png'}
+//        icon: {url: '/assets/marker.png'}
+        icon: {url: "<%= asset_path('marker.png') %>"}
       });
     }
 
